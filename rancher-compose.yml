@@ -1,0 +1,44 @@
+.catalog:
+  name: "Elastic-Mongo"
+  version: "1.0.0"
+  description: "Mongo sync with Elasticsearch"
+
+mongo-cluster:
+  scale: 3
+  retain_ip: true
+  metadata:
+    mongo:
+      yml:
+        replset.name: "rs0"
+
+mongo-connector:
+  scale: 1
+  
+elasticsearch-masters:
+  metadata:
+    elasticsearch:
+      yml:
+        cluster.name: "es"
+        node.name: "elastic"
+        node.data: "false"
+        node.master: "true"
+        network.host: "_site_"
+elasticsearch-datanodes:
+  metadata:
+    elasticsearch:
+      yml:
+        cluster.name: "es"
+        node.name: "elastic"
+        node.data: "true"
+        node.master: "false"
+        http.enabled: "false"
+        network.host: "_site_"
+elasticsearch-clients:
+  metadata:
+    elasticsearch:
+      yml:
+       cluster.name: "es"
+       node.name: "elastic"
+       node.data: "false"
+       node.master: "false"
+       network.host: "_site_"
